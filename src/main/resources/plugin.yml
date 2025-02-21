@@ -1,0 +1,10 @@
+name: pCoreSync
+version: '${project.version}'
+main: com.phoenixstudio.pcoresync.PCoreSync
+api-version: '1.13'
+authors: [ Weesli ]
+softdepend:
+  - LuckPerms
+commands:
+  hesapeşle:
+    description: Sync player with discord account
