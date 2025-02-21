@@ -1,10 +1,16 @@
 package com.phoenixstudio.pcoresync.util;
 
+import lombok.Getter;
+
 import java.util.*;
 
+
+/**
+ * Util class for generating unique codes.
+ */
 public class CodeUtil {
 
-    private static Map<UUID, String> codes = new HashMap<>();
+    @Getter private static Map<UUID, String> codes = new HashMap<>();
 
     public static String generateUniqueCode(UUID uuid) {
         if (codes.containsKey(uuid)) return null;

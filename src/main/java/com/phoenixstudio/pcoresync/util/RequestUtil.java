@@ -2,7 +2,6 @@ package com.phoenixstudio.pcoresync.util;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.phoenixstudio.pcoresync.PCoreSync;
 import com.phoenixstudio.pcoresync.config.ConfigLoader;
 import lombok.SneakyThrows;
 import org.bukkit.entity.Player;
@@ -24,14 +23,14 @@ public class RequestUtil {
         List<String> roleIds = new ArrayList<>();
 
         // filter and add permissions of player
-        for (Map.Entry<String, List<Map<String,String>>> values : ConfigLoader.getConfig().getRoles().getRoles().entrySet()){
-            String permission = values.getValue().get(1).get("requiredPermission");
+        for (Map.Entry<String, Map<String,String>> values : ConfigLoader.getConfig().getRoles().getRoles().entrySet()){
+            String permission = values.getValue().get("requiredPermission");
             if (player.hasPermission(permission)){
-                roleIds.add(values.getValue().get(1).get("roleId"));
+                roleIds.add(values.getValue().get("roleId"));
             }
         }
 
-        String url = ConfigLoader.getConfig().getDiscordBotServerIp();
+        String url = ConfigLoader.getConfig().getDiscordBotServerIp() + "/verify";
         HttpClient client = HttpClient.newHttpClient();
 
         JsonObject object = new JsonObject();
@@ -55,7 +54,7 @@ public class RequestUtil {
 
     @SneakyThrows
     public static boolean sendUpdateRequest(UUID uuid, UpdateType type, List<String> roleIds){
-        String url = ConfigLoader.getConfig().getDiscordBotServerIp();
+        String url = ConfigLoader.getConfig().getDiscordBotServerIp() + "/update";
         HttpClient client = HttpClient.newHttpClient();
         JsonObject object = new JsonObject();
         object.addProperty("type", type.name());

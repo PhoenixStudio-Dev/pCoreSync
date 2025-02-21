@@ -21,7 +21,11 @@ public class Database {
     }
 
     public static Database initialize(Plugin plugin){
-        return new Database(plugin);
+        try {
+            return new Database(plugin);
+        }catch (IllegalArgumentException ex){
+            return null;
+        }
     }
 
     public boolean hasPlayer(UUID uuid){
