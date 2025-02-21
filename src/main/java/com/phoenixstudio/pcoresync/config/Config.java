@@ -9,6 +9,7 @@ import lombok.Getter;
 
 import java.util.List;
 import java.util.Map;
+
 @Getter
 @Header("###############################################################")
 @Header(" # Phoenix Core Sync Configuration")
@@ -27,7 +28,7 @@ public class Config extends OkaeriConfig {
 
     @Variable("discordBotServerIp")
     @Comment({"Eğer discord botunuzu sunucudaki makinede çalıştırmıyorsanız", "Lütfen çalıştırdığınız sunucunun paylaşılan ip adresini giriniz.", "Default: localhost"})
-    private String discordBotServerIp = "localhost";
+    private String discordBotServerIp = "http://localhost:3000";
 
     @Variable("mongoUri")
     @Comment({"Lütfen buraya discord botunuza bağlı mongoDB bağlantısını bırakınız!"})
@@ -38,10 +39,11 @@ public class Config extends OkaeriConfig {
 
     @Getter
     public static class RoleConfiguration extends OkaeriConfig {
-        private Map<String, List<Map<String,String>>> roles = Map.of(
-                "vip",List.of(Map.of("requiredPermission", "sunucunuz.vip"), Map.of("roleId", "<role-id>")),
-                "mvip", List.of(Map.of("requiredPermission", "sunucunuz.mvip"), Map.of("roleId", "<role-id>"))
+        private Map<String, Map<String, String>> roles = Map.of(
+                "vip", Map.of("requiredPermission", "sunucunuz.vip", "roleId", "<role-id>"),
+                "mvip", Map.of("requiredPermission", "sunucunuz.mvip", "roleId", "<role-id>")
         );
+
     }
 
     @Getter
@@ -59,6 +61,6 @@ public class Config extends OkaeriConfig {
                 "&eDiscord İsim: &a%discord-name%",
                 "&8"
         );
-        private String ErrorMessage = "&cİşlem sırasında bir sorun yaşanıldı!";
+        private String ErrorMessage = "&cZaten bir kod istediniz! Kod: &f%code%";
     }
 }
