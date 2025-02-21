@@ -46,8 +46,8 @@ public class LuckPermsIntegration extends PermissionIntegration {
         Node node = event.getNode();
         String permission = event.getNode().getKey();
         // filter and add permissions of player
-        for (Map.Entry<String, List<Map<String,String>>> values : ConfigLoader.getConfig().getRoles().getRoles().entrySet()){
-            String requiredPermission = values.getValue().get(1).get("requiredPermission");
+        for (Map.Entry<String, Map<String,String>> values : ConfigLoader.getConfig().getRoles().getRoles().entrySet()){
+            String requiredPermission = values.getValue().get("requiredPermission");
             if (permission.equals(requiredPermission)){
                 RequestUtil.sendUpdateRequest(user.getUniqueId(), RequestUtil.UpdateType.ADD, List.of(node.getKey()));
             }
@@ -59,8 +59,8 @@ public class LuckPermsIntegration extends PermissionIntegration {
         Node node = event.getNode();
         String permission = event.getNode().getKey();
         // filter and remove permissions of player
-        for (Map.Entry<String, List<Map<String,String>>> values : ConfigLoader.getConfig().getRoles().getRoles().entrySet()){
-            String requiredPermission = values.getValue().get(1).get("requiredPermission");
+        for (Map.Entry<String, Map<String,String>> values : ConfigLoader.getConfig().getRoles().getRoles().entrySet()){
+            String requiredPermission = values.getValue().get("requiredPermission");
             if (permission.equals(requiredPermission)){
                 RequestUtil.sendUpdateRequest(user.getUniqueId(), RequestUtil.UpdateType.REMOVE, List.of(node.getKey()));
             }
